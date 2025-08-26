@@ -1,0 +1,13 @@
+[
+  {
+  "userId": "12345",
+  "name": "Ashley",
+  "email": "ashley000000@gmail.com",
+  "birthDate": "2000-12-25",
+  "gender": "Female",
+  "address": "monash clayton",
+  "occupation": "Software Engineer",
+  "favoriteDesserts": ["Chocolate Cake", "Ice Cream", "Cheesecake"],
+  "bio": "hello world"
+}
+]
