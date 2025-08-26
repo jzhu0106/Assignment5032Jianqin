@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1>User 001</h1>
-<ul>
-      <li>Name: {{ profile[0].name }}</li>
+    <h1>{{ profile[0].name }}</h1>
+    <ul>
+      
       <li>Email: {{ profile[0].email }}</li>
       <li>Birth Date: {{ profile[0].birthDate }}</li>
       <li>Gender: {{ profile[0].gender }}</li>
@@ -16,8 +16,12 @@
       <li>Bio: {{ profile[0].bio }}</li>
     </ul>
 
+    <button> Edit </button>
+    <button> Save </button>
   </div>
 </template>
+
+
 
 <script setup>
 import profile from "../assets/json/UserProfile.json";
@@ -28,7 +32,18 @@ import { ref, computed } from "vue"
 </script>
 
 <style scoped>
-h1 {
+/* h1 {
   margin-bottom: 20px;
+} */
+
+
+ .container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 80vw;
+  margin: 0 auto;
+  padding: 20px;
+  /* background-color: #f4f4f4; */
+  /* border-radius: 10px; */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
 }
 </style>
