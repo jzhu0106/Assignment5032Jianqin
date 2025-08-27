@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+    <h1>
+      Name: 
+      <input v-if="isEditing" v-model="userProfile.name" /> 
+      <span v-else>{{ userProfile.name }}</span>
+    </h1>
+
     <p>User ID: {{ userProfile.userId }}</p>
     
     <p>
@@ -35,15 +41,19 @@
       <span v-else>{{ userProfile.occupation }}</span>
     </p>
 
-    <p>Favorite Desserts:
-      <ul>
-        <li v-for="(dessert, index) in userProfile.favoriteDesserts" :key="index">
-          <input v-if="isEditing" v-model="userProfile.favoriteDesserts[index]" />
-          <span v-else>{{ dessert }}</span>
-        </li>
-      </ul>
-    </p>
-    
+   <div>
+<p>Favorite Desserts:</p>
+<select v-if="isEditing" v-model="userProfile.favoriteDesserts" multiple>
+  <option value="Chocolate Cake">Chocolate Cake</option>
+  <option value="Ice Cream">Ice Cream</option>
+  <option value="Cheesecake">Cheesecake</option>
+  <option value="Donuts">Donuts</option>
+  <option value="Brownies">Brownies</option>
+</select>
+<span v-else>{{ userProfile.favoriteDesserts.join(', ') }}</span>
+    </div>
+
+
     <p>
       Bio: 
       <textarea v-if="isEditing" v-model="userProfile.bio"></textarea>
@@ -59,16 +69,19 @@ import profile from "../assets/json/UserProfile.json";
 import { ref, computed } from "vue";
 
 
-const userProfile = ref(profile[0]);
-const isEditing = ref(false);
+//const userProfile = ref(profile[0]);
 
+const savedProfile = localStorage.getItem("userProfile");
+const userProfile = ref(savedProfile ? JSON.parse(savedProfile) : profile[0]);
+
+const isEditing = ref(false);
 
 const editProfile = () => {
   isEditing.value = true;
 };
 
-
 const saveProfile = () => {
+  localStorage.setItem("userProfile", JSON.stringify(userProfile.value));
   isEditing.value = false;
 };
 </script>
