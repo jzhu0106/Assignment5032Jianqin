@@ -7,7 +7,7 @@
   "gender": "Female",
   "address": "monash clayton",
   "occupation": "Software Engineer",
-  "favoriteDesserts": ["Chocolate Cake", "Ice Cream", "Cheesecake"],
+  "favoriteDesserts": "Ice Cream",
   "bio": "hello world"
 }
 ]
