@@ -4,7 +4,6 @@
         <div class="col-md-8 offset-md-2">
         <h1 class="text-center mb-4">User Profile</h1>
 
-
 <div class="row text-center mb-3">
   <div class="col-md-6">
           <div>User Name:</div>
@@ -66,9 +65,7 @@
   </div>
 
 
-
-
-      <div v-else class="container2 mt-5">
+      <div v-else class="container mt-5">
         <div class="row">
           <div class="col-md-8 offset-md-2">
       <h1 class="text-center">User Profile</h1>
@@ -249,6 +246,12 @@ const validateEmail = (blur) => {
 </script>
 
 <style scoped>
+
+button {
+  font-size: 1.5rem;  
+  padding: 1rem 1.25rem;
+  line-height: 1.2;
+}
 
 
 
