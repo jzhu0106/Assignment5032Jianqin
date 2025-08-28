@@ -1,98 +1,119 @@
 <template>
-  <div class="container">
-    <div v-if="!isEditing">
-      <h1>
-        Name:
-        <span>{{ userProfile.name }}</span>
-      </h1>
+  <div v-if="!isEditing" class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+        <h1 class="text-center mb-4">User Profile</h1>
 
-      <p>User ID: {{ userProfile.userId }}</p>
 
-      <p>
-        Email:
-        <span>{{ userProfile.email }}</span>
-      </p>
+<div class="row text-center mb-3">
+  <div class="col-md-6">
+          <div>User Name:</div>
+          <div>{{ userProfile.name }}</div>
+  </div>
+  <div class="col-md-6">
+          <div>User ID:</div>
+          <div>{{ userProfile.userId }}</div>
 
-      <p>
-        Birth Date:
-        <span>{{ userProfile.birthDate }}</span>
-      </p>
+  </div>
+</div>
 
-      <p>
-        Gender:
-        <span>{{ userProfile.gender }}</span>
-      </p>
 
-      <p>
-        Address:
-        <span>{{ userProfile.address }}</span>
-      </p>
+<div class="row text-center mb-3">
+  <div class="col-md-6">
+    <div>Email:</div>
+    <div>{{ userProfile.email }}</div>
+  </div>
+  <div class="col-md-6">
+    <div>Birth Date:</div>
+    <div>{{ userProfile.birthDate }}</div>
+  </div>
+</div>
 
-      <p>
-        Occupation:
-        <span>{{ userProfile.occupation }}</span>
-      </p>
+       <div class="row text-center mb-3">
+  <div class="col-md-6">
+    <div>Gender:</div>
+    <div>{{ userProfile.gender }}</div>
+  </div>
+  <div class="col-md-6">
+    <div>Address:</div>
+    <div>{{ userProfile.address }}</div>
+  </div>
+</div>
 
-      <div>
-        <p>Favorite Desserts:</p>
-        <span>{{ userProfile.favoriteDesserts }}</span>
+
+<div class="row text-center mb-3">
+  <div class="col-md-6">
+    <div>Occupation:</div>
+    <div>{{ userProfile.occupation }}</div>
+  </div>
+  <div class="col-md-6">
+    <div>Favorite Desserts:</div>
+    <div>{{ userProfile.favoriteDesserts }}</div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 text-center">Bio : </div>
+    <div class="col-md-6 text-center">{{ userProfile.bio }}</div>
+  </div>
+
+
+<div class="text-center mt-5">
+  <button @click="editProfile">Edit</button>
+</div>
+
       </div>
-
-      <p>
-        Bio:
-        <span>{{ userProfile.bio }}</span>
-      </p>
-
-      <button @click="editProfile">Edit</button>
     </div>
+  </div>
 
-    <div v-else>
-      <h1>
-        Name:
-        <input v-model="userProfile.name"
-         @blur="() => validateName(true)"
-         @input="() => validateName(false)"
+
+      <div v-else class="edit-container">
+      <h1 class="text-center">User Profile</h1>
+      <form @submit.prevent="saveProfile">
+
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name"
+          @blur="() => validateName(true)"
+          @input="() => validateName(false)"
+          v-model="userProfile.name"
         />
         <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
-      </h1>
 
-      <p>User ID: {{ userProfile.userId }}</p>
 
-      <p>
-        Email:
-        <input v-model="userProfile.email"
-         @blur="() => validateEmail(true)"
-         @input="() => validateEmail(false)" 
+      <div>User ID: {{ userProfile.userId }}</div>
+
+      <div>
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email"
+          @blur="() => validateEmail(true)"
+          @input="() => validateEmail(false)"
+          v-model="userProfile.email"
         />
         <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
-      </p>
+      </div>
 
-      <p>
-        Birth Date:
+      <div>
         <input v-model="userProfile.birthDate" type="date" />
-      </p>
+      </div>
 
-      <p>
-        Gender:
+      <div>
         <select v-model="userProfile.gender">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="other">Other</option>
         </select>
-      </p>
-
-      <p>
-        Address:
-        <input v-model="userProfile.address" />
-      </p>
-
-      <p>
-        Occupation:
-        <input v-model="userProfile.occupation" />
-      </p>
+      </div>
 
       <div>
-        <p>Favorite Desserts:</p>
+        <input v-model="userProfile.address" />
+      </div>
+
+      <div>
+        <input v-model="userProfile.occupation" />
+      </div>
+
+      <div>
+        <strong>Favorite Desserts:</strong>
         <select v-model="userProfile.favoriteDesserts">
           <option value="Chocolate Cake">Chocolate Cake</option>
           <option value="Ice Cream">Ice Cream</option>
@@ -102,15 +123,18 @@
         </select>
       </div>
 
-      <p>
+      <div>
         Bio:
         <textarea v-model="userProfile.bio"></textarea>
-      </p>
+      </div>
 
       <button @click="saveProfile">Save</button>
+      </form>
     </div>
-  </div>
+
+
 </template>
+
 
 
 <script setup>
@@ -196,4 +220,6 @@ const validateEmail = (blur) => {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 } */
+
+
 </style>
