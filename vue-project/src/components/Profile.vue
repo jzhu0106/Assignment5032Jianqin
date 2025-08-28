@@ -40,7 +40,6 @@
   </div>
 </div>
 
-
 <div class="row text-center mb-3">
   <div class="col-md-6">
     <div>Occupation:</div>
@@ -67,54 +66,87 @@
   </div>
 
 
-      <div v-else class="edit-container">
+
+
+      <div v-else class="container2 mt-5">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
       <h1 class="text-center">User Profile</h1>
+            <h5>User ID: {{ userProfile.userId }}</h5>
       <form @submit.prevent="saveProfile">
 
-        <label for="name" class="form-label">Name</label>
+
+
+
+
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="col-12 col-md-6"></div>
+ <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name"
           @blur="() => validateName(true)"
           @input="() => validateName(false)"
-          v-model="userProfile.name"
-        />
+          v-model="userProfile.name">
         <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
-
-
-      <div>User ID: {{ userProfile.userId }}</div>
-
-      <div>
+</div>
+        <div class="col-md-6">
         <label for="email" class="form-label">Email</label>
         <input type="text" class="form-control" id="email"
           @blur="() => validateEmail(true)"
           @input="() => validateEmail(false)"
-          v-model="userProfile.email"
-        />
+          v-model="userProfile.email">
         <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
       </div>
-
-      <div>
-        <input v-model="userProfile.birthDate" type="date" />
       </div>
 
-      <div>
-        <select v-model="userProfile.gender">
+
+
+
+
+ <div class="row mb-3">
+  <div class="col-md-6">
+    <div class="col-12 col-md-6"></div>
+
+<label for="birth date" class="form-label">Birth Date</label>
+        <input class="form-control" v-model="userProfile.birthDate" type="date" />
+      </div>
+      <div class="col-md-6">
+        <label for="gender" class="form-label">Gender</label>
+        <select class="form-control" v-model="userProfile.gender">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="other">Other</option>
         </select>
       </div>
+</div>
 
-      <div>
-        <input v-model="userProfile.address" />
+
+
+
+
+
+ <div class="row mb-3">
+  <div class="col-md-6">
+     <div class="col-12 col-md-6"></div>
+     <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" v-model="userProfile.address" />
       </div>
 
-      <div>
-        <input v-model="userProfile.occupation" />
+<div class="col-md-6">
+   <label for="occupation" class="form-label">Occupation</label>
+        <input type="text" class="form-control" v-model="userProfile.occupation" />
       </div>
+       </div>
 
-      <div>
-        <strong>Favorite Desserts:</strong>
-        <select v-model="userProfile.favoriteDesserts">
+
+
+
+ <div class="row mb-3">
+  <div class="col-md-6">
+    <div class="col-12 col-md-6"></div>
+    <label for="dessert" class="form-label">Favorite Dessert</label>
+        <select class="form-control" v-model="userProfile.favoriteDesserts">
           <option value="Chocolate Cake">Chocolate Cake</option>
           <option value="Ice Cream">Ice Cream</option>
           <option value="Cheesecake">Cheesecake</option>
@@ -122,18 +154,32 @@
           <option value="Brownies">Brownies</option>
         </select>
       </div>
+      
+</div>
 
+
+<div class="mb-3">
       <div>
-        Bio:
-        <textarea v-model="userProfile.bio"></textarea>
-      </div>
+        <label for="bio">Bio</label>
+        <textarea class="form-control" id="bio" rows="3" v-model="userProfile.bio"></textarea>
+      
+                  </div>
+           
+
+</div>
+
+
+
+
+
 
       <button @click="saveProfile">Save</button>
       </form>
     </div>
-
-
+</div>
+</div>
 </template>
+
 
 
 
@@ -203,6 +249,8 @@ const validateEmail = (blur) => {
 </script>
 
 <style scoped>
+
+
 
 /* h1 {
     text-align: center;
