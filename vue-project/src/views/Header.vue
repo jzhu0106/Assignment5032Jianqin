@@ -1,5 +1,6 @@
 <template>
-  <header v-show="$route.name !== 'Login'">
+  <!-- <header v-show="$route.name !== 'Login'"> -->
+    <header v-show="$route.name !== 'FireLogin' && $route.name !== 'FireRegister'">
     <div class="container">
       <div class="bg-white shadow-sm rounded-3" style="padding: 15px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
