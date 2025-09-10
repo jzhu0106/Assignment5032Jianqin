@@ -5,8 +5,8 @@
       <div class="bg-white shadow-sm rounded-3" style="padding: 15px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; gap: 15px; margin: 0 auto;">
-            <router-link to="/tutorial" class="nav-button">
-              Tutorial
+            <router-link to="/DessertTutorial" class="nav-button">
+              Dessert Tutorial
             </router-link>
             <router-link to="/activity" class="nav-button">
               Activity
