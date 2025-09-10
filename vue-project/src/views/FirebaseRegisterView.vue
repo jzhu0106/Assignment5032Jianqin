@@ -1,8 +1,9 @@
 <template>
-  <h1>Resgister Page</h1>
+  <h1>Register Page</h1>
   <h2>Create an Account</h2>
   <p><input type="text" placeholder="Email" v-model="email" /></p>
   <p><input type="password" placeholder="Password" v-model="password" /></p>
+  <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
   <p><button @click="register">Register</button></p>
 </template>
 
@@ -13,14 +14,17 @@ import { useRouter } from "vue-router";
 
 const email = ref("");
 const password = ref("");
+const errorMessage = ref("");
 const router = useRouter();
 const auth = getAuth();
 
 const register = () => {
-if (!email.value || !password.value) {
-    alert('please enter the email and password');
+  if (!email.value || !password.value) {
+    errorMessage.value = 'please enter the email and password';
     return;
   }
+
+  errorMessage.value = "";
 
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
@@ -29,8 +33,7 @@ if (!email.value || !password.value) {
     })
     .catch((error) => {
       console.log(error.code);
+      errorMessage.value = 'Registration failed. Please try again.';
     });
 };
-
-
 </script>

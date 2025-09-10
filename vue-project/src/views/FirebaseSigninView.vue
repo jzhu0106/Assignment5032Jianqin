@@ -2,6 +2,7 @@
   <h1>Sign in</h1>
   <p><input type="text" placeholder="Email" v-model="email" /></p>
   <p><input type="password" placeholder="Password" v-model="password" /></p>
+  <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
   <p><button @click="signin">Sign in</button></p>
   <p><button @click="goToRegister">Register</button></p>
 </template>
@@ -10,13 +11,14 @@
 import { ref } from "vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
-
+const errorMessage = ref("");
 const email = ref("");
 const password = ref("");
 const router = useRouter();
 const auth = getAuth();
 
 const signin = () => {
+  errorMessage.value = "";
 
     if (!email.value || !password.value) {
     alert('please enter the email and password');
@@ -26,11 +28,12 @@ const signin = () => {
       console.log("Firebase Register Successful!");
     //   router.push("/");
     router.push("/home"); 
-      console.log(auth.currentUser); // To check the current User signed in
+      console.log(auth.currentUser); 
     })
-    .catch((error) => {
-      console.log(error.code);
-    });
+   .catch((error) => {
+  console.log(error.code);
+  errorMessage.value = 'Please enter correct email and password';
+});
 };
 
 const goToRegister = () => {
