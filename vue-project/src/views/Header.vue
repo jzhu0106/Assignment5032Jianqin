@@ -19,20 +19,23 @@
             </router-link>
           </div>
           
-          <div>
-            <router-link to="/profile">
-              <img
-                src="@/components/icons/user.png" 
-                alt="User Icon"
-                class="rounded-circle user"
-              />
-            </router-link>
-          </div>
+<div style="display: flex; align-items: center; gap: 10px;">
+  <router-link to="/" class="nav-button">Sign out</router-link>
+  <router-link to="/profile">
+    <img
+      src="@/components/icons/user.png" 
+      alt="User Icon"
+      class="rounded-circle user"
+    />
+  </router-link>
+</div>
         </div>
       </div>
     </div>
   </header>
 </template>
+
+
 
 <style scoped>
 .nav-button {
