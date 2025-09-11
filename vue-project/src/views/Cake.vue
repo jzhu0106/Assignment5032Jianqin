@@ -4,8 +4,8 @@
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4>{{ title }}</h4>
-        <button v-if="!isEditing" @click="startEdit">Edit</button>
-        <button v-else @click="saveEdit">Save</button>
+        <button v-if="!isEditing && userRole === 'admin'" @click="startEdit">Edit</button>
+        <button v-else-if="userRole === 'admin'" @click="saveEdit">Save</button>
       </div>
       <div class="card-body">
         <div v-if="!isEditing">
@@ -45,13 +45,90 @@
           </div>
         </div>
       </div>
+
+
+<div class="card mt-3">
+  <div class="card-header">
+    <h5>Rating</h5>
+  </div>
+  <div class="card-body">
+    <p>averageRating: {{ averageRating }} </p>
+    
+
+    <div class="mb-3">
+      <label class="form-label">Please select a rating.:</label>
+      <select v-model="userRating" class="form-select" style="width: 100px;">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    
+    <button @click="submitRating" class="btn btn-primary">submit rating</button>
+  </div>
+</div>
+
+
+
     </div>
   </div>
 </template>
 
 <script setup>
 import BackButton from '@/components/BackButton.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import db from '../Firebase/init';
+import { collection, query, where, getDocs ,addDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
+
+const userRole = ref('');
+const auth = getAuth();
+
+
+const averageRating = ref(0);
+const userRating = ref(1);
+
+
+const fetchUserRole = async () => {
+  const user = auth.currentUser; 
+  if (user) {
+    const q = query(collection(db, 'users'), where('email', '==', user.email));
+    const querySnapshot = await getDocs(q);
+    const userData = querySnapshot.docs[0].data();
+    userRole.value = userData.role;
+  }
+};
+
+
+const fetchAverageRating = async () => {
+  //get average rating
+  const q = query(collection(db, 'ratings'), where('tutorialId', '==', "1"));
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    let totalScore = 0;
+querySnapshot.forEach((doc) => {
+  totalScore += parseInt(doc.data().rating);  
+});
+    averageRating.value = (totalScore / querySnapshot.size).toFixed(1);
+  }
+};
+
+
+const submitRating = async () => {
+  await addDoc(collection(db, 'ratings'), {
+    tutorialId: "1",
+    rating: userRating.value
+  });
+  fetchAverageRating();//update avg rating
+};
+
+onMounted(() => {
+  fetchUserRole();
+  fetchAverageRating();
+});
 
 const isEditing = ref(false);
 const title = ref('Chocolate Cake Tutorial');

@@ -9,8 +9,11 @@
 
 <script setup>
 import { ref } from "vue";
+import db from '../Firebase/init';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
+import { collection, addDoc } from 'firebase/firestore';
+
 
 const email = ref("");
 const password = ref("");
@@ -27,8 +30,17 @@ const register = () => {
   errorMessage.value = "";
 
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((data) => {
+    .then(async (data) => {
       console.log("Firebase Register Successful!");
+
+
+    //create user doc
+    await addDoc(collection(db, 'users'), {
+      email: email.value,
+      role: 'user', //default as user
+    });
+
+
       router.push("/FireLogin");
     })
     .catch((error) => {
