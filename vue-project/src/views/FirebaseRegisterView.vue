@@ -96,7 +96,7 @@ if (errors.value.email || errors.value.password) {
     });
 
 
-      router.push("/FireLogin");
+      router.push("/");
     })
     .catch((error) => {
       console.log(error.code);

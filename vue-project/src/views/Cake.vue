@@ -47,7 +47,7 @@
       </div>
 
 
-<div class="card mt-3">
+<div class="card mt-3 mb-5">
   <div class="card-header">
     <h5>Rating</h5>
   </div>
@@ -67,6 +67,7 @@
     </div>
     
     <button @click="submitRating" class="btn btn-primary">submit rating</button>
+    <div v-if="successMessage" class="text-success mt-2">{{ successMessage }}</div>
   </div>
 </div>
 
@@ -86,6 +87,8 @@ import { getAuth } from 'firebase/auth';
 
 const userRole = ref('');
 const auth = getAuth();
+
+const successMessage = ref('');
 
 
 const averageRating = ref(0);
@@ -123,6 +126,10 @@ const submitRating = async () => {
     rating: userRating.value
   });
   fetchAverageRating();//update avg rating
+  successMessage.value = 'Rating submitted successfully!';
+  setTimeout(() => {
+    successMessage.value = '';
+  }, 3000);
 };
 
 onMounted(() => {
